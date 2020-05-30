@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1590880923079.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3201126850",
+    "id" : "55D3EAC",
+    "lastKnownWriteTime" : 1590881214,
+    "last_content_update" : 1590881214212,
+    "path" : "~/Documents/Rproyectos/Stan_exercises/Ejemplos_Stan/stan1.stan",
+    "project_path" : "stan1.stan",
+    "properties" : {
+        "cursorPosition" : "31,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "stan"
+}
