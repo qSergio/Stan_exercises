@@ -129,8 +129,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 <<<<<<< HEAD
+<<<<<<< HEAD
 .Rproj.user
 =======
+=======
+>>>>>>> 5f9c3437281d1e1eae0ac2918c7489a76d3a6d7c
 
 # History files
 .Rhistory
@@ -175,4 +178,7 @@ vignettes/*.pdf
 
 # pkgdown site
 docs/
+<<<<<<< HEAD
 >>>>>>> 44df401... Se modifica gitignore
+=======
+>>>>>>> 5f9c3437281d1e1eae0ac2918c7489a76d3a6d7c
