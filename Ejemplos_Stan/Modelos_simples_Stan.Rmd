@@ -7,6 +7,21 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+# Paquetes de apoyo para manejo de datos y visualización
+library(dplyr)     
+library(ggplot2)   
+# Interpretabilidad
+library(vip)
+# Modelado
+library(rsample)
+library(caret)# resampling, tareas de entrenamiento
+              # y otras tareas de ML
+library(glmnet)   # para regularización
+# ingeniería de variables
+library(recipes)
+#
+library(ROCR)
+# Stan
 library(rstan)
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
