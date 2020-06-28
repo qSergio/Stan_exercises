@@ -172,3 +172,5 @@ vignettes/*.pdf
 
 # pkgdown site
 
+*.csv
+*.json
