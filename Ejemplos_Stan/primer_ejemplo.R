@@ -1,6 +1,7 @@
 
 # Carga de datos Housing-------------------------------------------------------
 library(rstan)
+library(dplyr)
 
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
@@ -9,7 +10,7 @@ housing <- read.table('http://jaredlander.com/data/housing1.csv',
                       sep=',',
                       header=T,
                       stringsAsFactors = F)
-
+saveRDS(housing,"housing")
 
 head(housing)
 
@@ -54,8 +55,8 @@ pairs(house1, pars=c('alpha','beta'))
 
 model_mul ="
 data {
-real y[125];
-real x[125,6];
+real y[481];
+real x[481,6];
 }
 parameters {
 real beta[6];
@@ -64,11 +65,26 @@ real alpha;
 }
 model {
 beta[1] ~ uniform(0,1000);
-for (n in 1:125)
+for (n in 1:481)
 y[n] ~ normal(alpha + beta[1]*x[n,1] + beta[2]*x[n,2] + beta[3]*x[n,3] + beta[4]*x[n,4] + beta[5]*x[n,5] + beta[6]*x[n,6], sigma);
 }"
+read.table('http://jaredlander.com/data/housing1.csv',
+           sep=',',
+           header=T,
+           stringsAsFactors = F)
 
-xy = list(y=housing[,1],x=housing[,2:7])
+house_prices <- read.table("https://raw.githubusercontent.com/fjuretig/R_statistics_cookbook/master/chapter03/house_prices.csv",
+                           sep=',',
+                           header=T,
+                           stringsAsFactors = F)
+saveRDS(house_prices,"housing_prices.rds")
+
+#housin_nna <- housing %>% 
+#  filter(!is.na(YearBuilt))
+
+#house_nna <- housing[complete.cases(housing), ]
+
+xy = list(y=house_prices[,1],x=house_prices[,2:7])
 fit = stan(model_code = model_mul, 
            data = xy, 
            warmup = 500, 
