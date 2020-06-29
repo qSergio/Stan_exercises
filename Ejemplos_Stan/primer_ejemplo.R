@@ -10,7 +10,7 @@ housing <- read.table('http://jaredlander.com/data/housing1.csv',
                       sep=',',
                       header=T,
                       stringsAsFactors = F)
-saveRDS(housing,"housing")
+saveRDS(housing,"housing.rds")
 
 head(housing)
 
@@ -89,10 +89,50 @@ fit = stan(model_code = model_mul,
            data = xy, 
            warmup = 500, 
            iter = 1000, 
-           chains = 1, 
-           cores = 1, 
+           chains = 3, 
+           cores = 3, 
            thin = 1,verbose=FALSE)
 stan_dens(fit)
 
+traceplot(fit)
+summary(fit)
 
+
+# Vamos a intentar regresión múltiple -------------------------------------------------------
+# imponemos priors más estrictas o "informativas"...
+
+model_mu2 ="
+data {
+real y[481];
+real x[481,6];
+}
+parameters {
+real beta[6];
+real sigma;
+real alpha;
+}
+model {
+beta[1] ~ uniform(0,1000);
+ 
+beta[2]  ~ normal(1,0.5);  
+beta[3]  ~ normal(1,0.1);  
+beta[4]  ~ normal(1,0.1);  
+beta[5]  ~ normal(1,0.1);  
+beta[6]  ~ normal(1,0.1);
+
+for (n in 1:481)
+  y[n] ~ normal(alpha + beta[1]*x[n,1] + beta[2]*x[n,2] + beta[3]*x[n,3] + beta[4]*x[n,4] + beta[5]*x[n,5] + beta[6]*x[n,6], sigma);
+}"
+
+fit = stan(model_code = model_mu2, 
+           data = xy, 
+           warmup = 500, 
+           iter = 2000, 
+           chains = 3, 
+           cores = 3, 
+           thin = 1,verbose=FALSE)
+stan_dens(fit)
+
+traceplot(fit)
+summary(fit)
 
